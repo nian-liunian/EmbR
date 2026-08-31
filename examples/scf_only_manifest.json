@@ -1,0 +1,37 @@
+{
+  "repulsion_parameter": {
+    "envelope_kind": "exp"
+  },
+  "calculate_parameter": {
+    "r_cut": 5.0,
+    "n_max": 8,
+    "l_max": 6,
+    "sigma": 0.5,
+    "workers": 1,
+    "charge_mode": "tip3p",
+    "scf": {
+      "method": "hf",
+      "basis": "6-31g*",
+      "d3bj": false
+    }
+  },
+  "datasets": [
+    {
+      "mode": "scf",
+      "prefix": "Gly+",
+      "out_dir": "examples",
+      "QM_atoms": 10,
+      "qm_charge": 0,
+      "n_frames": 1,
+      "e0_file": "EGly+.txt",
+      "scf_frames": "all_frames"
+    }
+  ],
+  "train": {
+    "lr": 6e-05,
+    "epochs": 10,
+    "batch": 1,
+    "device": "cpu",
+    "seed": 0
+  }
+}

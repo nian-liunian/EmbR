@@ -1,0 +1,90 @@
+{
+  "_comment": "Publication workflow configuration (HF/6-31G* training pool). Optional envelope parameters are omitted here so run.py uses the production defaults.",
+  "paths": {
+    "mix_out": "data/_mix",
+    "mix_prefix": "mix_embr"
+  },
+  "repulsion_parameter": {
+    "envelope_kind": "exp"
+  },
+  "calculate_parameter": {
+    "r_cut": 5.0,
+    "n_max": 8,
+    "l_max": 6,
+    "sigma": 0.5,
+    "workers": 2,
+    "threads": 8,
+    "scf_A_fix": true,
+    "scf_error": 0.2,
+    "scf_skip_existing": false,
+    "charge_mode": "tip3p",
+    "scf": {
+      "method": "hf",
+      "basis": "6-31g*",
+      "d3bj": false
+    }
+  },
+  "datasets": [
+    {
+      "mode": "ab_initio",
+      "prefix": "Gly+",
+      "out_dir": "data/Gly+",
+      "QM_atoms": 10,
+      "qm_charge": 0,
+      "i0": 1,
+      "n_frames": 600,
+      "e0_file": "EGly+.txt",
+      "scf_frames": [
+        1
+      ]
+    },
+    {
+      "mode": "ab_initio",
+      "prefix": "Ala+",
+      "out_dir": "data/Ala_hf_+",
+      "QM_atoms": 13,
+      "qm_charge": 0,
+      "i0": 1,
+      "n_frames": 600,
+      "e0_file": "EAla+.txt",
+      "scf_frames": [
+        1
+      ]
+    },
+    {
+      "mode": "ab_initio",
+      "prefix": "Asp+",
+      "out_dir": "data/Asp+",
+      "QM_atoms": 15,
+      "qm_charge": -1,
+      "i0": 1,
+      "n_frames": 600,
+      "e0_file": "EAsp+.txt",
+      "scf_frames": [
+        1
+      ]
+    },
+    {
+      "mode": "ab_initio",
+      "prefix": "Lys+",
+      "out_dir": "data/Lys+",
+      "QM_atoms": 25,
+      "qm_charge": 1,
+      "i0": 1,
+      "n_frames": 600,
+      "e0_file": "ELys+.txt",
+      "scf_frames": [
+        1
+      ]
+    }
+  ],
+  "train": {
+    "lr": 6e-05,
+    "epochs": 2000,
+    "batch": 32,
+    "weight_corr": 15,
+    "corr_target": 0.9,
+    "val_frac": 0.15,
+    "seed": 0
+  }
+}

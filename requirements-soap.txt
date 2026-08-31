@@ -1,0 +1,7 @@
+# EmbR: DScribe SOAP features + PyTorch training
+# Install with requirements-train.txt (see that file for mirror pip one-liners).
+
+numpy>=1.22
+torch>=2.0
+ase>=3.22
+dscribe>=2.0

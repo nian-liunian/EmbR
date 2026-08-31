@@ -1,0 +1,280 @@
+ Input Parameters
+=====================
+
+This file describes the parameters used in EmbR manifest files.
+Parameters are organized following the structure of the example manifest.
+
+
+1. paths
+========
+
+Parameter          Type        Default
+--------------------------------------------
+mix_out            string      -
+mix_prefix         string      -
+
+
+Description
+-----------
+
+mix_out:
+    Output directory for mixed training results and generated models.
+
+mix_prefix:
+    Prefix name for the trained EmbR model and related files.
+
+
+
+2. repulsion_parameter
+======================
+
+Parameter          Type        Default
+--------------------------------------------
+envelope_kind      string      exp
+
+
+Description
+-----------
+
+envelope_kind:
+    Functional form used for the repulsive embedding envelope.
+
+    Available options depend on the implemented model.
+    The default exponential form is used in the current workflow.
+
+
+
+3. calculate_parameter
+======================
+
+Parameter          Type        Default
+--------------------------------------------
+r_cut_mm           float       null
+r_cut              float       5.0
+n_max              integer     8
+l_max              integer     6
+sigma              float       0.5
+workers            integer     1
+threads            integer     1
+scf_A_fix          boolean     false
+scf_error          float       0.2
+scf_skip_existing  boolean     false
+charge_mode        string      tip3p
+
+
+SCF parameters
+--------------
+
+Parameter          Type        Default
+--------------------------------------------
+method             string      hf
+basis              string      6-31+g*
+d3bj               boolean     false
+
+
+Description
+-----------
+
+r_cut_mm:
+    Optional cutoff distance for selecting MM environments.
+    null indicates that no additional MM cutoff filtering is applied.
+
+r_cut:
+    SOAP descriptor cutoff radius.
+
+n_max:
+    Number of radial basis functions used in SOAP representation.
+
+l_max:
+    Maximum angular momentum channel used in SOAP representation.
+
+sigma:
+    Gaussian smearing width used for SOAP descriptors.
+
+workers:
+    Number of parallel workers used during preprocessing.
+
+threads:
+    Number of computational threads used for QM calculations.
+
+scf_A_fix:
+    Enables the optional amplitude correction procedure during
+    self-consistent EmbR calculations.
+
+scf_error:
+    Convergence threshold for the self-consistent correction procedure.
+
+scf_skip_existing:
+    Controls whether existing SCF results are reused.
+
+charge_mode:
+    Specifies how MM point charges are assigned when charges are
+    not provided in the input structure.
+
+    Supported modes:
+    
+    tip3p:
+        Assigns TIP3P water charges and formal charges for common ions.
+
+    mulliken:
+        Generates charges based on Mulliken population analysis
+        for suitable molecular fragments.
+
+    If complete MM charges are already provided in Coo.xyz,
+    the supplied charges are used directly.
+
+
+SCF settings:
+
+method:
+    Quantum chemistry method used for reference and SCF calculations.
+
+basis:
+    Basis set used in QM calculations.
+
+d3bj:
+    Enables or disables D3(BJ) dispersion correction.
+
+
+
+4. datasets
+===========
+
+Parameter          Type        Default
+--------------------------------------------
+mode               string      ab_initio
+prefix             string      required
+out_dir            string      required
+QM_atoms           integer     required
+qm_charge          integer     0
+i0                 integer     1
+n_frames           integer     all
+e0_file            string      -
+scf_frames         list        all
+
+
+Description
+-----------
+
+mode:
+    Calculation mode.
+
+    Available modes:
+
+    ab_initio:
+        Generates reference data and prepares training resources.
+
+    train:
+        Trains an EmbR model from prepared data.
+
+    train_with_npz:
+        Directly trains an EmbR model from an existing npz cache.
+
+    scf:
+        Applies a trained EmbR model for self-consistent calculations.
+
+
+prefix:
+    Name identifier of the current molecular system.
+
+out_dir:
+    Working directory containing input structures and generated files.
+
+QM_atoms:
+    Number of atoms treated at the QM level.
+
+qm_charge:
+    Charge of the QM region.
+
+i0:
+    Starting frame index.
+
+n_frames:
+    Number of coordinate frames used.
+
+e0_file:
+    Reference interaction-energy file.
+
+scf_frames:
+    Frames selected for EmbR SCF calculations.
+
+
+
+5. train
+========
+
+Parameter          Type        Default
+--------------------------------------------
+lr                 float       6e-5
+epochs             integer     2000
+batch              integer     32
+weight_corr        float       15
+corr_target        float       0.9
+val_frac           float       0.15
+seed               integer     0
+weight_decay       float       0
+patience           integer     200
+
+
+Description
+-----------
+
+lr:
+    Learning rate.
+
+epochs:
+    Maximum number of training epochs.
+
+batch:
+    Training batch size.
+
+weight_corr:
+    Weight of the correlation constraint term.
+
+corr_target:
+    Target correlation coefficient used in training.
+
+val_frac:
+    Fraction of data reserved for validation.
+
+seed:
+    Random seed for reproducibility.
+
+weight_decay:
+    Weight decay coefficient.
+
+patience:
+    Early stopping patience.
+
+
+
+Terminology
+===========
+
+
+dE:
+    dE corresponds to the interaction-energy difference ΔE used in
+    the manuscript.
+
+
+E0:
+    Legacy notation used in the code for interaction-energy correction
+    values.
+
+
+ref:
+    Reference full_QM calculation data used for training and validation.
+
+
+full_QM:
+    Quantum-mechanical reference calculation where the corresponding
+    environment is explicitly treated at the QM level.
+
+
+Emb0:
+    Conventional point-charge embedding baseline.
+
+
+ksoft:
+    Internal implementation name retained for model compatibility.
+    It refers to the EmbR machine-learning correction model.

@@ -1,0 +1,13 @@
+# Core ML training (numpy + torch).
+# SOAP / EmbR (ksoft) also needs:  pip install -r requirements-soap.txt
+#
+# Install (Tsinghua PyPI mirror):
+#   pip install -r requirements-train.txt -r requirements-soap.txt \
+#     -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+#
+# Aliyun mirror (alternative):
+#   pip install -r requirements-train.txt -r requirements-soap.txt \
+#     -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
+
+numpy>=1.22
+torch>=2.0

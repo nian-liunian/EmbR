@@ -1,0 +1,10 @@
+# EmbR publication pipeline
+#
+# Install (CPU example):
+#   pip install -r requirements.txt
+#
+# For PySCF + optional D3(BJ) see requirements-scf.txt comments.
+
+-r requirements-train.txt
+-r requirements-soap.txt
+-r requirements-scf.txt

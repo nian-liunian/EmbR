@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Training / caches (ignore transient outputs; curated release_data is allowed below)
+ref/
+scf/
+_mix/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Curated public datasets/checkpoints
+!release_data/
+!release_data/**
+
+
+.ipynb_checkpoints/

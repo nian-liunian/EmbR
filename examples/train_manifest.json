@@ -1,0 +1,21 @@
+{
+  "paths": {
+    "npz": "data/_mix/mix_embr.npz"
+  },
+  "datasets": [
+    {
+      "mode": "train_with_npz",
+      "prefix": "mix_embr",
+      "out_dir": "data/_mix"
+    }
+  ],
+  "train": {
+    "lr": 6e-05,
+    "epochs": 2000,
+    "batch": 32,
+    "weight_corr": 15,
+    "corr_target": 0.9,
+    "val_frac": 0.15,
+    "seed": 0
+  }
+}

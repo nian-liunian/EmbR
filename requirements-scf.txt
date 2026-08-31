@@ -1,0 +1,8 @@
+# PySCF embedding / HF reference (EmbR pipeline)
+numpy>=1.22
+pyscf>=2.3
+scipy>=1.10
+
+# D3(BJ) is OPTIONAL — only for --d3bj (B3LYP). HF does not need it.
+# If pip install dftd3 fails (git/SSL), skip it and omit --d3bj.
+# Prefer: conda install -c conda-forge dftd3
