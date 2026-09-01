@@ -37,51 +37,12 @@
       "scf_frames": [
         1
       ]
-    },
-    {
-      "mode": "ab_initio",
-      "prefix": "Ala+",
-      "out_dir": "data/Ala_hf_+",
-      "QM_atoms": 13,
-      "qm_charge": 0,
-      "i0": 1,
-      "n_frames": 600,
-      "e0_file": "EAla+.txt",
-      "scf_frames": [
-        1
-      ]
-    },
-    {
-      "mode": "ab_initio",
-      "prefix": "Asp+",
-      "out_dir": "data/Asp+",
-      "QM_atoms": 15,
-      "qm_charge": -1,
-      "i0": 1,
-      "n_frames": 600,
-      "e0_file": "EAsp+.txt",
-      "scf_frames": [
-        1
-      ]
-    },
-    {
-      "mode": "ab_initio",
-      "prefix": "Lys+",
-      "out_dir": "data/Lys+",
-      "QM_atoms": 25,
-      "qm_charge": 1,
-      "i0": 1,
-      "n_frames": 600,
-      "e0_file": "ELys+.txt",
-      "scf_frames": [
-        1
-      ]
     }
   ],
   "train": {
     "lr": 6e-05,
     "epochs": 2000,
-    "batch": 32,
+    "batch": 12,
     "weight_corr": 15,
     "corr_target": 0.9,
     "val_frac": 0.15,

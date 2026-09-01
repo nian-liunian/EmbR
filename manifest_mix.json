@@ -30,7 +30,7 @@
     {
       "mode": "ab_initio",
       "prefix": "Gly+",
-      "out_dir": "data/Gly+",
+      "out_dir": "data/train/Gly+",
       "QM_atoms": 10,
       "qm_charge": 0,
       "i0": 1,
@@ -43,7 +43,7 @@
     {
       "mode": "ab_initio",
       "prefix": "Ala+",
-      "out_dir": "data/Ala_hf_+",
+      "out_dir": "data/train/Ala+",
       "QM_atoms": 13,
       "qm_charge": 0,
       "i0": 1,
@@ -56,7 +56,7 @@
     {
       "mode": "ab_initio",
       "prefix": "Asp+",
-      "out_dir": "data/Asp+",
+      "out_dir": "data/train/Asp+",
       "QM_atoms": 15,
       "qm_charge": -1,
       "i0": 1,
@@ -69,7 +69,7 @@
     {
       "mode": "ab_initio",
       "prefix": "Lys+",
-      "out_dir": "data/Lys+",
+      "out_dir": "data/train/Lys+",
       "QM_atoms": 25,
       "qm_charge": 1,
       "i0": 1,
