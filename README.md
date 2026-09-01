@@ -182,6 +182,54 @@ Required input:
 
 ------------------------------------------------------------------------
 
+## Predict dE from a trained checkpoint
+
+A trained EmbR checkpoint can be used to predict the energy correction (dE, corresponding to ΔE in the manuscript) for new structures.
+
+There are two supported workflows.
+
+### 1. Prediction from an existing SOAP cache
+
+If the SOAP cache (`.npz`) has already been generated, prediction can be performed directly:
+
+```bash
+python predict_delta_e.py \
+    --ckpt path/to/model.ckpt \
+    --soap-npz path/to/cache.npz \
+    -o predicted_dE.txt
+```
+The output file contains the predicted dE values for each structure in the input cache.
+
+If you want to compare your prediction with full-QM, add
+```bash
+--e0-file path/to/E0.txt \
+```
+output file will contain columns for full-QM and predict, and it will also output the root mean square error (RMSE).
+
+### 2. Prediction starting from Coo.xyz structures
+
+For new molecular configurations provided as Coo*.xyz, EmbR can automatically generate the required SOAP features and apply the trained checkpoint.
+
+Required:
+-   trained checkpoint;
+-   a directory containing Coo*.xyz structures
+-   the corresponding reference embedding information (ref directory); if do not have reference embedding information, run `ab_initio` mode to get them
+
+Example:
+```bash
+python predict_delta_e.py \
+    --ckpt path/to/model.ckpt \
+    --coo-dir path/to/Coo \
+    --ref-dir path/to/ref \
+    --qm-atoms 10 \
+    --i0 1 \
+    --n-frames 10 \
+    -o predicted_dE.txt
+```
+The script automatically performs the required feature generation and then predicts dE values for the provided structures.
+
+The prediction range can be controlled using `--i0` and `--n-frames` when only a subset of Coo structures needs to be evaluated.
+
 # Output Files
 
 Typical output files include:
