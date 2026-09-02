@@ -268,11 +268,6 @@ Example manifest files are provided in the repository:
 
 Example commands:
 
-Complete workflow:
-
-``` bash
-python run.py --manifest examples/all_manifest.json
-```
 
 Train_with_npz:
 
