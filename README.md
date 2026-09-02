@@ -120,6 +120,9 @@ The provided `manifest_mix.json` contains a complete workflow
 configuration including reference calculation, preprocessing, training,
 and EmbR calculations.
 
+For dataset description and pretrained model availability, please refer to [datasets.md](datasets.md).
+
+
 ------------------------------------------------------------------------
 
 # Calculation Modes
@@ -140,8 +143,9 @@ Required input:
 
 The coordinate files should contain QM atoms followed by MM atoms.
 
-MM charges can either: - be provided directly in the input structure; -
-be generated using `charge_mode`.
+MM charges can either: 
+- be provided directly in the Coo.xyz by yourself (Append the corresponding charge after the z-coordinate);
+- be generated using `charge_mode`.
 
 ------------------------------------------------------------------------
 
@@ -151,8 +155,7 @@ Trains an EmbR model from prepared training data.
 
 Required input:
 
--   precomputed training cache;
--   reference interaction energies.
+-   reference interaction energies and electron densities.
 
 Output:
 
@@ -166,8 +169,8 @@ Directly trains an EmbR model from an existing precomputed `.npz` file.
 
 Required input:
 
--   SOAP/cache `.npz`;
--   corresponding energy labels.
+-   SOAP-cache `.npz`.
+
 
 ------------------------------------------------------------------------
 
@@ -178,7 +181,7 @@ Applies a trained EmbR model in self-consistent QM/MM calculations.
 Required input:
 
 -   trained checkpoint;
--   precomputed cache.
+-   precomputed soap-cache.
 
 ------------------------------------------------------------------------
 
@@ -201,10 +204,12 @@ python predict_delta_e.py \
 The output file contains the predicted dE values for each structure in the input cache.
 
 If you want to compare your prediction with full-QM, add
+
 ```bash
 --e0-file path/to/E0.txt \
 ```
-output file will contain columns for full-QM and predict, and it will also output the root mean square error (RMSE).
+
+Output file will contain columns for full-QM and predict, and it will also output the root mean square error (RMSE).
 
 ### 2. Prediction starting from Coo.xyz structures
 
@@ -237,9 +242,13 @@ Typical output files include:
   File       Description
   ---------- ------------------------------------------
   `ref/`     full_QM reference data
-  `*.npz`    precomputed SOAP/cache data
+  
+  `*.npz`    precomputed SOAP-cache data
+  
   `*.ckpt`   trained EmbR model checkpoint
+  
   `scf/`     EmbR self-consistent calculation results
+  
 
 ------------------------------------------------------------------------
 
@@ -249,10 +258,12 @@ Example manifest files are provided in the repository:
 
   File                                Description
   ----------------------------------- --------------------------------------
-  `manifest.json`                     Minimal single-dataset configuration
+  `manifest.json`                     Single-dataset configuration
+  
   `manifest_mix.json`                 Mixed-system workflow configuration
-  `examples/all_manifest.json`        Complete workflow example
-  `examples/train_manifest.json`      Training example
+  
+  `examples/train_manifest.json`      Train_with_npz example
+  
   `examples/scf_only_manifest.json`   SCF-only example
 
 Example commands:
@@ -263,7 +274,7 @@ Complete workflow:
 python run.py --manifest examples/all_manifest.json
 ```
 
-Training:
+Train_with_npz:
 
 ``` bash
 python run.py --manifest examples/train_manifest.json
