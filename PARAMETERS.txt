@@ -214,6 +214,7 @@ val_frac           float       0.15
 seed               integer     0
 weight_decay       float       0
 patience           integer     200
+device             string      cpu
 
 
 Description
@@ -245,7 +246,8 @@ weight_decay:
 
 patience:
     Early stopping patience.
-
+device:
+    Device will be used during training.
 
 
 Terminology
